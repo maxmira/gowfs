@@ -59,6 +59,9 @@ func NewFileSystem(conf Configuration) (*FileSystem, error) {
 
 			return c, nil
 		},
+		Proxy: func(request *http.Request) (*url.URL, error) {
+			return http.ProxyFromEnvironment(request)
+		},
 		MaxIdleConnsPerHost:   conf.MaxIdleConnsPerHost,
 		ResponseHeaderTimeout: conf.ResponseHeaderTimeout,
 	}
