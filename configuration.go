@@ -17,6 +17,7 @@ type Configuration struct {
 	DisableCompression    bool
 	ResponseHeaderTimeout time.Duration
 	MaxIdleConnsPerHost   int
+	UseKeberos            bool
 }
 
 func NewConfiguration() *Configuration {
@@ -33,7 +34,7 @@ func (conf *Configuration) GetNameNodeUrl() (*url.URL, error) {
 		return nil, errors.New("Configuration namenode address not set.")
 	}
 
-	var urlStr string = fmt.Sprintf("http://%s%s%s", conf.Addr, WebHdfsVer, conf.BasePath)
+	urlStr := fmt.Sprintf("http://%s%s%s", conf.Addr, WebHdfsVer, conf.BasePath)
 
 	if &conf.User == nil || len(conf.User) == 0 {
 		u, _ := user.Current()

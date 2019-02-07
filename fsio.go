@@ -55,13 +55,14 @@ func (fs *FileSystem) Create(
 
 	// take over default transport to avoid redirect
 	req, _ := http.NewRequest("PUT", u.String(), nil)
-	rsp, err := fs.transport.RoundTrip(req)
+	rsp, err := fs.client.Transport.RoundTrip(req)
 	if err != nil {
 		return false, err
 	}
 
 	// extract returned url in header.
 	loc := rsp.Header.Get("Location")
+
 	u, err = url.ParseRequestURI(loc)
 	if err != nil {
 		return false, fmt.Errorf("FileSystem.Create(%s) - invalid redirect URL from server: %s", u, err.Error())
