@@ -17,7 +17,7 @@ type Configuration struct {
 	DisableCompression    bool
 	ResponseHeaderTimeout time.Duration
 	MaxIdleConnsPerHost   int
-	UseKeberos            bool
+	UseKerberos            bool
 }
 
 func NewConfiguration() *Configuration {

@@ -70,7 +70,7 @@ func NewFileSystem(conf Configuration) (*FileSystem, error) {
 		ResponseHeaderTimeout: conf.ResponseHeaderTimeout,
 	}
 
-	if conf.UseKeberos {
+	if conf.UseKerberos {
 		t := spnego.Transport{}
 		fs.client = http.Client{
 			Transport: &t,
